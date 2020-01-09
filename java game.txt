@@ -1,0 +1,407 @@
+﻿import java.util.Scanner;
+
+
+public class DataAnalyze {
+        public static void main(String[] args) {
+                int sampleSize = 0;
+                double trial1Sum = 0;
+                double trial2Sum = 0;
+                double trial3Sum = 0;
+                double trial4Sum = 0;
+                double[] averageArr = new double[4];
+                double minAverage = Double.MAX_VALUE;  // during the first iteration of the loop we know that it will 
+                // be replaced by a smaller number.
+                double maxAverage = Double.MIN_VALUE;  // during the first iteration of the loop we know that it will 
+                // be replaced by a bigger number, unless it's smaller than 4.9E-324 such as 0.0.
+
+
+                Scanner kb = new Scanner(System.in);
+
+
+                System.out.print("Please enter the sample size: ");
+                sampleSize = kb.nextInt();
+
+
+                if (sampleSize <= 0) {
+                        System.out.print("No data to analyze. Ending program.");
+                }
+                else {
+                        //System.out.print(sampleSize); // FIXME testing, delete before submission.
+
+
+
+
+                        int[] trial1Arr = new int[sampleSize];
+                        int[] trial2Arr = new int[sampleSize];
+                        int[] trial3Arr = new int[sampleSize];
+                        int[] trial4Arr = new int[sampleSize];
+
+
+
+
+                        // Getting inputs from the user and store it in the corresponding array and 
+                        // calculating the total sum of all the elements in the array in order to find the average latter on.
+                        System.out.println();
+                        System.out.println("Enter numbers for Trial 1");
+                        for (int i = 0; i < trial1Arr.length; ++i) {
+                                System.out.print("Enter sample #" + (i + 1) + ": ");
+                                trial1Arr[i] = kb.nextInt();
+                                trial1Sum += trial1Arr[i];
+                        }
+
+
+                        /*for (int i = 0; i < trial1Arr.length; ++i) {
+                                System.out.print(trial1Arr[i]); // FIXME DELETE
+
+
+                        } */
+
+
+                        System.out.println();
+
+
+                        System.out.println("Enter numbers for Trial 2");
+                        for (int i = 0; i < trial2Arr.length; ++i) {
+                                System.out.print("Enter sample #" + (i + 1) + ": ");
+                                trial2Arr[i] = kb.nextInt();
+                                trial2Sum += trial2Arr[i];
+                        }
+
+
+                        System.out.println();
+
+
+                        System.out.println("Enter numbers for Trial 3");
+                        for (int i = 0; i < trial3Arr.length; ++i) {
+                                System.out.print("Enter sample #" + (i + 1) + ": ");
+                                trial3Arr[i] = kb.nextInt();
+                                trial3Sum += trial3Arr[i];
+                        }
+
+
+                        System.out.println();
+
+
+                        System.out.println("Enter numbers for Trial 4");
+                        for (int i = 0; i < trial4Arr.length; ++i) {
+                                System.out.print("Enter sample #" + (i + 1) + ": ");
+                                trial4Arr[i] = kb.nextInt();
+                                trial4Sum += trial4Arr[i];
+                        }
+
+
+                        // Storing the average of each trial into an array to find the max and min.
+                        averageArr[0] = (trial1Sum / sampleSize);
+                        averageArr[1] = (trial2Sum / sampleSize);
+                        averageArr[2] = (trial3Sum / sampleSize);
+                        averageArr[3] = (trial4Sum / sampleSize);
+
+
+
+
+                        // Find the minimum average of 4 trials.
+                        minAverage = averageArr[0];
+                        maxAverage = averageArr[0];
+                        for (int i = 1; i < 4; ++i) {
+                                if (averageArr[i] < minAverage) {
+                                        minAverage = averageArr[i];
+                                }
+                                if (averageArr[i] > maxAverage){
+                                        maxAverage = averageArr[i];
+                                }
+                        }
+
+
+
+
+                        // Printing the result out.
+                        System.out.println();
+                        System.out.println("\tSample #\tTrial 1\t\tTrial 2\t\tTrial 3\t\tTrial 4");
+                        for (int i = 0; i < sampleSize; ++i) {
+                                System.out.println("\t" + (i + 1) + 
+                                                "\t\t" + trial1Arr[i] +
+                                                "\t\t" + trial2Arr[i] +
+                                                "\t\t" + trial3Arr[i] +
+                                                "\t\t" + trial4Arr[i]);
+                        }
+
+
+                        System.out.println("\t-----------------------------------------------------------------------");
+                        System.out.print("Average: ");
+                        for (int i = 0; i < 4; ++i) {
+                                System.out.print("\t\t" + averageArr[i]);
+                        }
+
+
+
+
+                        System.out.println("\n"); // Two newlines.
+
+
+                        System.out.println("Min Average: " + minAverage);
+                        System.out.println("Max Average: " + maxAverage);
+
+
+                        System.out.println();
+
+
+                        if (minAverage ==  maxAverage) {
+                                System.out.println("The trials match EXACTLY!");
+                        }
+                        else if ((2 * minAverage) > maxAverage) {
+                                System.out.println("The trials concur with each other!");
+                        }
+                        else { 
+                                System.out.println("The trials do NOT concur!");
+                        }
+
+
+                        kb.close();
+
+
+                }
+
+
+        }
+
+
+}
+
+
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class BobcatHotel {
+
+
+        public static void main(String[] args) {
+
+
+                // DECLARING VARIABLES
+                int numGuests = 0;
+                int typeOfRoom = 0;
+                int numOfNights = 0;
+                int typeOfMeal = 0;
+                int memberAAA = 0;
+                int memberClub = 0;
+                double baseRoomCost = 0.0;
+                double mealCost = 0.0;
+                double preliminaryCost = 0.0;
+                double totalCost = 0.0;
+                double discountAAA = 0.0;
+                double discountClub = 0.0;
+                double discountTotal = 0.0;
+                boolean clubDiscountResult = false;
+
+
+
+
+                Scanner input = new Scanner(System.in);
+                Random randNum = new Random();
+
+
+
+
+                System.out.println("ROOM OPTIONS");
+                System.out.println("1. Single @ $50.50 per night");
+                System.out.println("2. Double @ $75.00 per night");
+                System.out.println("3. Queen @ $100.75 per night");
+                System.out.println("4. King @ $150.25 per night");
+                System.out.println("5. Master Suite @ $225.50 per night\n");
+
+
+                System.out.print("Number of guests: ");
+                numGuests = input.nextInt();
+                System.out.print("Please your choice of room (enter 1/2/3/4/5 correspoding to the options shown above): ");
+                typeOfRoom = input.nextInt();
+                System.out.print("Please enter the number of nights: ");
+                numOfNights = input.nextInt();
+                System.out.print("Are you a AAA member (enter 1 for yes, 0 for no)? ");
+                memberAAA = input.nextInt();
+                System.out.print("Are you a club member (enter 1 for yes, 0 for no)? ");
+                memberClub = input.nextInt();
+
+
+                if (memberClub == 1 && randNum.nextInt(10) >= 4) {
+                        clubDiscountResult = true;
+                        System.out.println("\nCongratulations! You've qualified for our \"Stay 4 nights get 1 free promotion\"");
+                        System.out.println("Discount will be applied during checkout depending on the number of days");
+                }
+                else if (memberClub == 1) {
+                        System.out.println("\nUnfortunately, you didn't qualify for our \"Stay 4 nights get 1 free promotion\"."
+                                        + " Better luck next time!");
+                }
+
+
+                // Forcing club discount to be true.
+                //clubDiscountResult = true;
+
+
+
+
+                System.out.println("\nMEAL PACKAGES (PRICES SHOWN ARE PER NIGHT)");
+                System.out.println("0. Complementary @ $0 per guest");
+                System.out.println("1. Standard @ $30 per guest");
+                System.out.println("2. Deluxe @ $50 per guest");
+                if (typeOfRoom == 5) {
+                        System.out.println("3. Indulgence @ $85 per guest");
+                        System.out.print("\nPlease select your desired meal package (enter 0/1/2/3 corresponding to the options shown"
+                                        + " above): ");
+                }
+                else {
+                        System.out.print("\nPlease select your desired meal package (enter 0/1/2 corresponding to the options shown"
+                                        + " above): ");
+                }
+
+
+                typeOfMeal = input.nextInt();
+
+
+
+
+
+
+                // CALCULATING NUMBERS
+                switch (typeOfRoom) {
+                case 1:
+                        baseRoomCost = numOfNights * 50.50;
+                        break;
+                case 2:
+                        baseRoomCost = numOfNights * 75.00;
+                        break;
+                case 3:
+                        baseRoomCost = numOfNights * 100.75;
+                        break;
+                case 4:
+                        baseRoomCost = numOfNights * 150.25;
+                        break;
+                case 5:
+                        baseRoomCost = numOfNights * 225.50;
+                        break;
+                default:
+                        System.out.println("You have selected an invalid room type.");
+                        break;
+
+
+                }
+
+
+                // System.out.println("baseRoomCost: " + baseRoomCost); // FIXME delete when you are done.
+
+
+                switch (typeOfMeal) {
+                case 0:
+                        break;
+                case 1:
+                        mealCost = numGuests * numOfNights * 30.00;
+                        break;
+                case 2:
+                        mealCost = numGuests * numOfNights * 50.00;
+                        break;
+                case 3:
+                        mealCost = numGuests * numOfNights * 85.00;
+                        break;
+                default:
+                        System.out.println("You have entered an invalid meal plan.");        
+                        break;
+
+
+                }
+
+
+                // System.out.println("mealCost: " + mealCost); // FIXME delete when you are done.
+                preliminaryCost = baseRoomCost + mealCost;
+                // System.out.println("preliminaryCost: " + preliminaryCost); // FIXME delete when you are done.
+
+
+                if (memberAAA == 1) {
+                        discountAAA = preliminaryCost * 0.1;
+                }
+
+
+                // System.out.println("discountAAA: " + discountAAA); // FIXME delete when you are done.
+
+
+
+
+                if (clubDiscountResult) {                        // clubDiscountResult == true, don't do this.                        
+                        switch (typeOfRoom) {
+                        case 1:
+                                discountClub = (numOfNights / 4) * 50.50;
+                                break;
+                        case 2:
+                                discountClub = (numOfNights / 4) * 75.00;
+                                break;
+                        case 3:
+                                discountClub = (numOfNights / 4) * 100.75;
+                                break;
+                        case 4:
+                                discountClub = (numOfNights / 4) * 150.25;
+                                break;
+                        case 5:
+                                discountClub = (numOfNights / 4) * 225.50;
+                                break;
+                        default:
+                                System.out.println("You have selected an invalid room type.");
+                                break;
+
+
+                        }
+                }
+
+
+                // System.out.println("discountClub: " + discountClub); // FIXME delete when you are done.
+
+
+                discountTotal = discountAAA + discountClub;
+                // System.out.println("discountTotal: " + discountTotal); // FIXME delete when you are done.
+
+
+                totalCost = preliminaryCost - discountTotal;
+                // System.out.println("totalCost : " + totalCost); // FIXME delete when you are done.
+
+
+
+
+
+
+                // PRINTING OUT RESULTS
+                System.out.println("\nCHECKOUT");
+                System.out.println("Room Cost:\t\t" + " $" +baseRoomCost);
+
+
+                if (typeOfMeal != 0) {
+                        System.out.println("Meal Cost:             " + " +$" + mealCost);
+                }
+
+
+                System.out.println("Preliminary Total Cost:\t" + " $" + preliminaryCost);
+
+
+                if (memberAAA == 1) {
+                        System.out.println("AAA Discount:          " + " -$" + discountAAA);
+                }
+
+
+                if (discountClub > 1.0) { // To avoid 0.0 as a very small positive number. e.g. 0.0 could be 0.0000000032
+                        System.out.println("Club Member Discount:  " + " -$" + discountClub);
+                } 
+                else if (memberAAA == 0){
+                        System.out.println("No Discouts Applied");
+                } 
+
+
+                System.out.println("Total Cost of Booking:\t" + " $" + totalCost);
+
+
+        }
+
+
+}
+
+
+System.out.print("Do you wish to repeat your inputs? (1 for yes): ");
+                        if (input.nextInt() == 1) {
+                                continue;
+                        }
